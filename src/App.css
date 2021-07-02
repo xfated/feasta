@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+:root {
+  --background: ;
+  --block: ;
+  --highlight: ;
+  --header: ;
+  --darkbg: #282c34;
+  --text: ;
+  --icon: #afe3f8;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.divider{
+  border-top: 4px solid var(--muted);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.flex {
+  display:flex;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.flex-stretch {
+  flex-grow: 1;
 }
 
-.App-link {
-  color: #61dafb;
+.flex-justify-evenly {
+  justify-content: space-evenly !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flex-horizontal-center {
+  justify-content: center !important;
+}
+
+.flex-vertical-center{
+  align-items: center !important;
+}
+
+.modal-w60{
+  min-width: 60% !important;
+}
+
+.modal-w80{
+  min-width: 80% !important;
+}
+
+.modal-w90{
+  min-width: 90% !important;
+}
+
+.modal-w100{
+  min-width: 100% !important;
+}
+
+
+html {
+  font-size: 0.7rem;
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+  html {font-size:0.9rem;} /*1rem = 16px*/
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  html {font-size:1rem;} /*1rem = 16px*/
 }

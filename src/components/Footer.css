@@ -1,0 +1,30 @@
+.footer{
+    height: 200px;
+    flex-wrap: wrap;
+    background: var(--darkbg);
+    overflow: hidden;
+}
+
+.footer-content {
+    height: 100%;
+}
+
+
+.quote {
+    font-family: simplifica, Georgia, 'Times New Roman', Times, serif;
+    font-weight:700;
+    color: rgb(242, 201, 227);
+    font-size: 1.4rem;
+    animation: color-change 5s linear infinite alternate;
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+    .quote {font-size:1.5rem;} /*1rem = 16px*/
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .quote {font-size:1.6rem;} /*1rem = 16px*/
+}
+  

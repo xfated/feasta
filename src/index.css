@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Add fonts */
+@font-face {
+  font-family: 'simplifica';
+  src: url('./fonts/simplifica/simplifica_typeface-webfont.woff2') format('woff2'),
+       url('./fonts/simplifica/simplifica_typeface-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

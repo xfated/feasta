@@ -1,0 +1,14 @@
+.jumbotron {
+    padding:70px 30px 70px 30px;
+    margin:0px auto;
+    background-color: #add8e9;
+    color:rgb(40, 41, 38);
+}
+
+.title-container{
+    max-width: 80%;
+    background: rgba(170, 181, 182, 0.93);
+    border-radius: 20px;
+    padding-bottom: 1px;
+}
+
