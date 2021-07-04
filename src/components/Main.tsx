@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from './Navigation';
 import Header from './Header';
 import RestaurantFinder from './FoodFinder';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
@@ -7,6 +8,7 @@ import Footer from './Footer';
 function Main() {
     return (
         <>
+            <Navigation />
             <Header />
             <Switch>
                 <Route path="/" component={RestaurantFinder} />
