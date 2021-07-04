@@ -8,10 +8,6 @@ interface PropsFunction {
 }
 
 const QueryForm = ({ handleQuery }: PropsFunction) => {
-    useEffect(() => {
-        console.log("Mounted")
-    }, [])
-
     const [query, setQuery] = useState({
         postal: "",
         topk: 0,
@@ -19,8 +15,10 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
         query: ""
     })
 
+    // To give help for postal
     const [postalValid, setPostalValid] = useState(true)
     const validatePostal = (postal: string) => {
+        setTimeout( () => {}, 1000)
         if (postal.length === 0) {
             setPostalValid(true);
             return
@@ -29,6 +27,19 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
         const validate = postalRe.test(postal);
         setPostalValid(validate);
     }
+
+    // To enable submit button
+    const [validSubmit, setValidSubmit] = useState(true)
+    const validateSubmit = () => {
+        if (!postalValid) {
+            setValidSubmit(false);
+            return
+        }
+        setValidSubmit(true);
+    }
+    useEffect(() => {
+        validateSubmit()
+    });
 
     const submitQuery = (e: React.FormEvent) => {
         e.preventDefault()
@@ -88,7 +99,8 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                         </FormGroup>
                     </Row>
                     <Row className="mt-3 flex flex-horizontal-center">
-                        <Button outline type="submit" value="submit" color="secondary" className="mt-3 col-3">
+                        <Button outline type="submit" value="submit" color="secondary" 
+                                disabled={!validSubmit} className="mt-3 col-3">
                             Submit
                         </Button>
                         </Row>
