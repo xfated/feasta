@@ -1,0 +1,11 @@
+.query-container{
+    background-color: var(--background1);
+}
+
+.section-header{
+    background-color: var(--background1);
+}
+
+.header-underline{
+    border-bottom: 2px solid var(--highlight)
+}

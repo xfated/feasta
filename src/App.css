@@ -1,8 +1,9 @@
 :root {
-  --background: ;
-  --block: ;
-  --highlight: ;
-  --header: ;
+  --background1: #E2F0F9;
+  --background2: #FFFFFF;
+  --block: #B0DDE4;
+  --highlight: #DF4C73;
+  --header: #286FB4;
   --darkbg: #282c34;
   --text: ;
   --icon: #afe3f8;
@@ -10,7 +11,7 @@
 
 
 .divider{
-  border-top: 4px solid var(--muted);
+  border-top: 4px solid var(--darkbg);
 }
 
 .flex {
@@ -49,6 +50,10 @@
   min-width: 100% !important;
 }
 
+.section-header{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding: 5% 0;
+}
 
 html {
   font-size: 0.7rem;
