@@ -6,8 +6,8 @@
 }
 
 .title-container{
-    max-width: 80%;
-    background: rgba(170, 181, 182, 0.93);
+    max-width: 80% !important;
+    background: rgba(170, 181, 182, 0.93) !important;
     border-radius: 20px;
     padding-bottom: 1px;
 }

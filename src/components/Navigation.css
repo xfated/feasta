@@ -1,0 +1,38 @@
+.navbar-nav{
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.navbar-overlap{
+    padding: 0;
+    width: 100% !important;
+    background: rgba(132, 183, 228, 0.93);
+    position: fixed;
+    top:0; 
+    z-index: 1;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}
+html {
+    overflow-y: scroll !important;
+}
+
+/* Navbar transitions */
+.nav-hidden {
+    background: var(--background2);
+    top: -50px !important;
+}
+
+.button{
+    background: rgb(0,0,0,0);
+    margin-left: 2px;
+    margin-right: 2px;
+    border:none;
+}
+
+textarea {
+    resize: none;
+}

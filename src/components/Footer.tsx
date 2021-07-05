@@ -9,10 +9,11 @@ const Footer = () => {
            <div className="footer-content flex flex-vertical-center flex-horizontal-center"> 
                 <div>
                     <blockquote className="blockquote text-center flex">
+                        <i className="quote-icon fa fa-quote-left fa-pull-left"></i>
                         <p className="quote mb-0">
-                            <i className="quote-icon fa fa-broom fa-pull-left"></i>
-                            This is my quote
+                            A balanced diet is a cookie in each hand.
                         </p>
+                        <i className="quote-icon fa fa-quote-right fa-pull-right"></i>
                     </blockquote>
                 </div>
             </div>

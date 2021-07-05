@@ -1,6 +1,6 @@
 import React from 'react';
-import Navigation from './Navigation';
 import Header from './Header';
+import Navigation from './Navigation';
 import RestaurantFinder from './FoodFinder';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Footer from './Footer';

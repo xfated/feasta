@@ -88,10 +88,10 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                         </FormGroup>
                     </Row>
                     <Row className="mt-2">
-                        <FormGroup>
+                        <FormGroup className="col-12">
                             <Label htmlFor="query">&nbsp;Query</Label>
                             <Input type="textarea" id="query" name="query" value={query.query}
-                                placeholder="Your query here"
+                                placeholder="Your query here" rows={4}
                                 onChange={(e) => setQuery({
                                                     ...query,
                                                     query:e.target.value}
@@ -103,7 +103,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                 disabled={!validSubmit} className="mt-3 col-3">
                             Submit
                         </Button>
-                        </Row>
+                    </Row>
                 </Form>
             </div>
         </>
