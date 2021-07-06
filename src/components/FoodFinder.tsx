@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './FoodFinder.css';
 import QueryForm from './QueryForm';
 import RestaurantInfo from './RestaurantInfo';
+import { Button, Spinner } from 'reactstrap';
 
 // Define interfaces for our results
 export interface QueryResult {
@@ -122,6 +123,31 @@ const FoodFinder = () => {
         return ''
     }   
 
+    // const [queryDisplay, setQueryDisplay] = 
+    const QueryDisplay = () => {
+        if (queryStatus === 'Success' && results != null) {
+            return (
+                <RestaurantInfo results={results}/>
+            )
+        } 
+        if (queryStatus === 'Loading') {
+            return (
+                <div>
+                    <Spinner style={{ width: '3rem', height: '3rem' }} />
+                </div>
+            )
+        }
+        if (queryStatus === 'Failed') {
+            return (
+                <div>
+                    <p>Failed</p>
+                </div>
+            )
+        }
+        return (<div className="placeholder test">
+                    <p>Your results will be shown here.</p>
+                </div>)
+    }
     return(
         <>  
             <div className="divider"></div>
@@ -129,22 +155,23 @@ const FoodFinder = () => {
                 <div className="col-12 flex flex-horizontal-center mb-3">
                     <h1 className="mb-0 col-6 col-sm-4 header-underline">Where to feast?</h1>
                 </div>
-                <p>Some suggestions for when you're out of options.</p>
+                <p>Options for when you're out of options.</p>
             </div>
             <div className="query-container pb-5">
                 <QueryForm handleQuery={handleQuery}/>
             </div>
-            {/* <Button onClick={() => {
+            <div className="flex flex-horizontal-center">
+                <QueryDisplay />
+            </div>
+            <Button style={{backgroundColor:'green', zIndex:1}}onClick={() => {
                     if (results === null){
                         console.log("it is null");
                     }
                     console.log(results);
+                    console.log(queryStatus);
                     }}>
                 Test
-            </Button> */}
-            { (queryStatus === 'Success' && results != null) ? 
-                <RestaurantInfo results={results}/> :
-                <div className="placeholder"></div>}
+            </Button>
         </>
     )
 }
