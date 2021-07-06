@@ -1,16 +1,16 @@
-import { request } from 'http';
 import React, { useState } from 'react';
 import './FoodFinder.css';
 import QueryForm from './QueryForm';
-import { Button } from 'reactstrap';
+import RestaurantInfo from './RestaurantInfo';
 
 // Define interfaces for our results
-interface QueryResult {
+export interface QueryResult {
     name:string,
     address:string,
     tags:Array<string>,
     about:string,
-    summary:string
+    summary:string,
+    // link:string
 }
 
 // type QueryType = "Random" | "Semantic";
@@ -25,7 +25,7 @@ var url:string = "http://127.0.0.1:8000";
 
 const FoodFinder = () => {
     
-    const [results, setResults] = useState<Array<null | QueryResult>>();
+    const [results, setResults] = useState<null | Array<QueryResult>>();
     type queryStatusType = "Start" | "Loading" | "Failed" | "Success";
     const [queryStatus, setQueryStatus] = useState<queryStatusType>("Start");
     // // Define different possible search
@@ -55,15 +55,18 @@ const FoodFinder = () => {
         const resultOptions = {
             method: 'GET',
         }
-        let status:string = "processing";
+        let status:string = "Processing";
         let limit:number = 0
-        while (status === "processing" && limit < 1){
+        while (status === "Processing" && limit < 10){
             limit += 1;
             let response = await fetch(resultURL, resultOptions);
             let data = await response.json()
+            console.log(data);
+            console.log(status)
             status = data['status']
-            if (status !== "processing") {
+            if (status !== "Processing") {
                 setResults(data['preds']);
+                setQueryStatus("Success");
                 console.log(data['preds']);
             }
             else{
@@ -74,6 +77,7 @@ const FoodFinder = () => {
     }
 
     const handleQuery = (values: Query) => {
+        setQueryStatus("Loading")
         let end_point:string = ""
         if (values.querytype === "Random" || values.query.length === 0){
             if (values.postal.length === 0)
@@ -110,6 +114,7 @@ const FoodFinder = () => {
                 getResults(resultURL, task_id);
             })
             .catch( (err) => {
+                setQueryStatus("Failed")
                 console.log(err);
             });
         
@@ -137,6 +142,9 @@ const FoodFinder = () => {
                     }}>
                 Test
             </Button> */}
+            { (queryStatus === 'Success' && results != null) ? 
+                <RestaurantInfo results={results}/> :
+                <div className="placeholder"></div>}
         </>
     )
 }

@@ -1,0 +1,32 @@
+.container {
+    min-height: 200px;
+}
+
+.rest-link {
+    position: absolute;
+    top: 1;
+    right: 0;
+    font-size: 20px;
+}
+
+.rest-button {
+    border: none;
+    background-color: #fff;
+    color: var(--highlight);
+}
+.rest-button:hover {
+    background-color: var(--background1);
+    color: var(--highlight);
+}
+
+.rest-title{
+    border-bottom: 1px solid var(--highlight);
+}
+
+.rest-container{
+    position: relative;
+}
+
+.placeholder {
+    min-height: 200px;
+}

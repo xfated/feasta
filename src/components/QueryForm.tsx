@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Button, Label, Form, FormGroup, Input, FormFeedback, FormText } from 'reactstrap';
+import { Row, Button, Label, Form, FormGroup, Input, FormFeedback, FormText,
+        InputGroup, InputGroupButtonDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import './QueryForm.css';
 import { Query } from './FoodFinder';
 
@@ -12,9 +13,15 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
         postal: "",
         topk: 0,
         querytype: "Random",
-        query: ""
+        query: "",
+        region: "",
     })
 
+    // To change between postal and region
+    const [postalregion, setPostalregion] = useState('Postal');
+    const [postalregionDropdownOpen, setPostalregionDropdownOpen] = useState(false);
+    const togglePostalregionDropdow = () => setPostalregionDropdownOpen(!postalregionDropdownOpen);
+    
     // To give help for postal
     const [postalValid, setPostalValid] = useState(true)
     const validatePostal = (postal: string) => {
@@ -23,7 +30,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
             setPostalValid(true);
             return
         }
-        const postalRe = /^\d{3}$/;
+        const postalRe = /^\d{2}$/;
         const validate = postalRe.test(postal);
         setPostalValid(validate);
     }
@@ -42,8 +49,8 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
     });
 
     const submitQuery = (e: React.FormEvent) => {
-        e.preventDefault()
-        handleQuery(query)
+        e.preventDefault();
+        handleQuery(query);
     }
 
     return(
@@ -51,19 +58,6 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
             <div className="container">
                 <Form onSubmit = {(e) => submitQuery(e)}>
                     <Row>
-                        <FormGroup className="col-12 col-md-4 mt-2 mt-md-0">
-                            <Label htmlFor="postal">&nbsp;Postal Code</Label>
-                            <Input type="text" id="postal" name="postal" value={query.postal}
-                                placeholder="Postal Code"
-                                invalid={!postalValid}
-                                onChange={(e) => {
-                                    validatePostal(e.target.value);
-                                    setQuery({...query,
-                                        postal:e.target.value});
-                                }}/>
-                            <FormFeedback>Invalid postal code. Please input 3 digits or simply leave the field empty</FormFeedback>
-                            <FormText>First 3 digits of postal code area you wish to search</FormText>
-                        </FormGroup>
                         <FormGroup className="col-12 col-md-4 mt-2 mt-md-0">
                             <Label htmlFor="topk">&nbsp;Number of Results</Label>
                             <Input type="number" id="topk" name="topk" min="0" value={query.topk}
@@ -85,6 +79,51 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                 <option>Semantic</option>
                             </Input>
                             <FormText>{`Semantic: Search restaurants that are similar to your query | Random: Returns restaurants randomly`}</FormText> 
+                        </FormGroup>
+                        <FormGroup className="mt-2 col-12 col-md-4 mt-md-0">
+                            <Label htmlFor="postalregion">&nbsp;Postal / Region</Label>
+                            <InputGroup>
+                                <InputGroupButtonDropdown addonType="prepend" isOpen={postalregionDropdownOpen} toggle={togglePostalregionDropdow}>
+                                    <DropdownToggle caret>
+                                        {postalregion}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem onClick={() => { setPostalregion('Postal'); setQuery({...query, region:''}); }} >Postal</DropdownItem>
+                                        <DropdownItem onClick={() => { setPostalregion('Region'); setQuery({...query, postal:''}); setPostalValid(true); }}>Region</DropdownItem>
+                                    </DropdownMenu>
+                                </InputGroupButtonDropdown>
+                                { (postalregion === 'Postal') ? 
+                                    <Input type="text" id="postalregion" name="postalregion" value={query.postal}
+                                        placeholder="Postal Code"
+                                        invalid={!postalValid}
+                                        onChange={(e) => {
+                                            validatePostal(e.target.value);
+                                            setQuery({...query,
+                                                postal:e.target.value});
+                                        }}/>
+                                    :
+                                    <Input type="select" id="region" name="region" value={query.region}
+                                        placeholder="Region"
+                                        onChange={(e) => setQuery({
+                                                            ...query,
+                                                            postal:'',
+                                                            region:e.target.value}
+                                                        )}>
+                                        <option></option>
+                                        <option>North-East</option>
+                                        <option>North</option>
+                                        <option>Central</option>
+                                        <option>West</option>
+                                        <option>East</option>
+                                    </Input>
+                                }
+                            </InputGroup>
+                            { (postalregion === 'Postal') && 
+                                <FormFeedback>Invalid postal code. Please input 3 digits or simply leave the field empty</FormFeedback> }
+                            { (postalregion === 'Postal') &&     
+                                <FormText>First 2 digits of postal code area you wish to search</FormText> }
+                            { (postalregion === 'Region') &&     
+                                <FormText>Region of Singapore</FormText> }
                         </FormGroup>
                     </Row>
                     <Row className="mt-2">
