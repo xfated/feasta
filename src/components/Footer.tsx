@@ -22,6 +22,13 @@ const Footer = () => {
                             <small>Feedback / Queries / Suggestions: <span className="email">taykaiyang556@gmail.com</span></small>
                         </p>    
                     </div>
+                    <div className="col-12 flex flex-horizontal-center">
+                        <p className="disclaimer mt-0">
+                            <small>A few words:</small><br/>
+                            <small>It has been a fun project but I'm not sure if I will continue developing on this idea or just leave it as it is.</small><br/>
+                            <small>Would like to hear any feedback if this has actually been useful for anyone else as it has been for me!</small>
+                        </p>
+                    </div>
                 </div>
             </div>
             

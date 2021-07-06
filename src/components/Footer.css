@@ -1,5 +1,5 @@
 .footer{
-    height: 200px;
+    height: 250px;
     flex-wrap: wrap;
     background: var(--darkbg);
     overflow: hidden;
@@ -21,6 +21,9 @@
 }
 
 .contact{
+    color: rgb(186, 118, 30);
+}
+.disclaimer{
     color: rgb(186, 118, 30);
 }
 .email{
