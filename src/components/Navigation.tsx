@@ -46,9 +46,9 @@ const Navigation = () => {
                 </ModalHeader>
                 <ModalBody>
                     <ListGroup flush>
-                        <ListGroupItem key={1}>
+                        <ListGroupItem key={1} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
-                                <div className="col-12 col-md-3 border-right">
+                                <div className="col-12 col-md-3">
                                     <h4>Origins</h4>
                                 </div>
                                 <div className="col-12 col-md-9">
@@ -59,21 +59,25 @@ const Navigation = () => {
                                 </div>      
                             </div>
                         </ListGroupItem>
-                        <ListGroupItem key={1}>
+                        <ListGroupItem key={2} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
+                                <div className="col-12 col-md-3 order-md-2">
+                                    <h4>Purpose</h4>
+                                </div>
                                 <div className="col-12 col-md-9">
                                     <p>I want suggestions.</p>
                                     <p>I want suggestions catered to my immediate interests.</p>
                                     <p>I knew what I wanted. So I made this website.</p>
+                                    <p>Hopefully it helps you too.</p>
+                                    <p>
+                                        <small>P.S. The goal here is to simply serve as a starting point to search for places you'd like to eat at!</small>
+                                    </p>
                                 </div>      
-                                <div className="col-12 col-md-3 border-left">
-                                    <h4>Purpose</h4>
-                                </div>
                             </div>
                         </ListGroupItem>
-                        <ListGroupItem key={1}>
+                        <ListGroupItem key={3} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
-                                <div className="col-12 col-md-3 border-right">
+                                <div className="col-12 col-md-3">
                                     <h4>Behind the scenes</h4>
                                 </div>
                                 <div className="col-12 col-md-9">

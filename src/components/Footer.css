@@ -20,6 +20,16 @@
     color:rgb(86, 52, 8);
 }
 
+.contact{
+    color: rgb(186, 118, 30);
+}
+.email{
+    color: var(--highlight);
+}
+
+.test{
+    background-color: green;
+}
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
     .quote {font-size:1.5rem;} /*1rem = 16px*/

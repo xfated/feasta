@@ -1,9 +1,9 @@
 .query-container{
-    background-color: var(--background1);
+    background-color: var(--background0);
 }
 
 .section-header{
-    background-color: var(--background1);
+    background-color: var(--background0);
 }
 
 .header-underline{
