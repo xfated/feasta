@@ -21,6 +21,8 @@
 
 .rest-title{
     border-bottom: 1px solid var(--highlight);
+    font-family: simplifica, Georgia, 'Times New Roman', Times, serif;
+
 }
 
 .rest-container{

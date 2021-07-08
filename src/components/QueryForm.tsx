@@ -25,7 +25,6 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
     // To give help for postal
     const [postalValid, setPostalValid] = useState(true)
     const validatePostal = (postal: string) => {
-        setTimeout( () => {}, 1000)
         if (postal.length === 0) {
             setPostalValid(true);
             return

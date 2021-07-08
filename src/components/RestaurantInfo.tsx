@@ -9,7 +9,7 @@ interface RestaurantInfoProps {
 
 const RestaurantInfo: React.FC<RestaurantInfoProps> = (props) => {
     const RestInfo = props.results != null ? props.results.map((result, i) => {
-            console.log(result.summary);
+            // console.log(result.summary);
             return (
                 <div className="row rest-container">
                     <a href={'https://www.google.com'} className="rest-link">

@@ -13,3 +13,26 @@
 .test {
     background-color: green;
 }
+
+.results-container{
+    min-height: 300px;
+}
+
+.waitphrase-enter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity:0.01;
+}
+.waitphrase-enter-active{
+    opacity:1;
+    transition: all 500ms ease-in;
+}
+.waitphrase-exit{
+    opacity:1;
+}
+.waitphrase-exit-active {
+    opacity:0.01;
+    transition: all 500ms ;
+}
