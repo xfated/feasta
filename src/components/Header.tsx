@@ -10,10 +10,10 @@ const Header = () => {
                                 backgroundSize: 'cover',
                                 borderRadius: "0px"}}>
                 <Container className="text-center title-container">
-                    <h1 className="display-2 main-title">Feasta</h1>
+                    <h1 className="display-2 main-title pt-2 mb-0">Feasta</h1>
                     <h3 className="mb-0">fē-ˈe-stə</h3>
                     <small>Pronounced: 'Fiesta'</small>
-                    <p className="pt-2">By the indecisive, for the indecisive.</p>
+                    <p className="pt-3"><b><i>By the indecisive, for the indecisive.</i></b></p>
                 </Container>
             </Jumbotron>
         </>

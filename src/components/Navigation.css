@@ -20,6 +20,12 @@ html {
     overflow-y: scroll !important;
 }
 
+.info-modal{
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center'
+}
+
 /* Navbar transitions */
 .nav-hidden {
     background: var(--background2);

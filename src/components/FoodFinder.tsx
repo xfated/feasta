@@ -12,7 +12,8 @@ export interface QueryResult {
     tags:Array<string>,
     about:string,
     summary:string,
-    link:string
+    link:string,
+    rating:number
 }
 
 // type QueryType = "Random" | "Semantic";
@@ -49,58 +50,85 @@ const FoodFinder = () => {
             const displayPhrases = setInterval(() => {
                 var idx = Math.floor(Math.random() * waitPhrases.length);
                 setWaitPhraseIdx(idx);
-                console.log(idx);
             }, 2000);
             return () => clearInterval(displayPhrases);
         }
     }, [queryStatus, waitPhrases.length])
 
     // Function to make request and store results
-    async function getResults(resultURL:string, task_id: string) {
-        // Get results
+    // Use interval polling to fetch result
+    const [tries, setTries] = useState(0);
+    async function getResults(resultURL:string){
         const resultOptions = {
             method: 'GET',
         }
-        let status:string = "Processing";
-        let limit:number = 0
-        while (status === "Processing" && limit < 20){
-            limit += 1;
-            let data = null;
-            try {
-                let response = await fetch(resultURL, resultOptions);
-                let data = await response.json()
-            } catch (e) {
-                console.error(e);
-                setFailureMessage(e);
-            }
-            if (data == null) {
-                return; 
-            }
-            console.log(data);
-            console.log(status)
-            status = data['status']
-            if (status !== "Processing") {
-                setResults(data['preds']);
-                setQueryStatus("Success");
-                console.log(data['preds']);
-                setFailureMessage(null);
-            }
-            else{
-                // wait 1 second before trying to poll agian
-                setTimeout(() => {}, 1000);
-            }
+        let data = null;
+        try {
+            let response = await fetch(resultURL, resultOptions);
+            data = await response.json();
+        } catch (e) {
+            console.error(e);
+            setFailureMessage(e);
+            return false;
         }
+        if (data === null) {
+            return false; 
+        }
+        let status:string = data['status']
+        // console.log(data);
+        // console.log(status);
+        if (status !== "Processing") {
+            setResults(data['preds']);
+            setQueryStatus("Success");
+            // console.log(data['preds']);
+            setFailureMessage(null);
+            return true;
+        }
+        return false;
+    }
+    function callGetResults(resultURL:string) {
+        // Get results
+        const getResult = setInterval(() => {
+            // console.log(`try: ${tries}`);
+            getResults(resultURL)
+                .then((success) => {
+                    if (success || tries > 10) {
+                        clearInterval(getResult);
+                        setTries(0);
+                        // console.log('success');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setTries(tries + 1);
+                });
+            setTries(tries + 1);
+        }, 500);   
+
     }
 
     const handleQuery = (values: Query) => {
         setQueryStatus("Loading")
         let end_point:string = ""
-        if (values.querytype === "Random" || values.query.length === 0){
+        console.log(values.querytype);
+        if (values.querytype === "Top Rated"){
             // Postal selected
-            if (values.postal.length !== 0)
-                end_point = "restRandomPostal";
+            if (values.postal.length !== 0){
+                end_point = "restTopkPostal";
+            }   
             // Region selected
-            if (values.region.length !== 0)
+            else if (values.region.length !== 0)
+                end_point = "restTopkRegion";
+            else
+                end_point = "restTopk"; 
+        }
+        else if (values.querytype === "Random" || values.query.length === 0){
+            // Postal selected
+            if (values.postal.length !== 0){
+                end_point = "restRandomPostal";
+            }   
+            // Region selected
+            else if (values.region.length !== 0)
                 end_point = "restRandomRegion";
             else
                 end_point = "restRandom"; 
@@ -115,10 +143,10 @@ const FoodFinder = () => {
             else 
                 end_point = "restFinder"
         }
-        
         let requestURL:string = url + `/${end_point}`;
         let predictURL:string = requestURL + '/predict';
-
+        // console.log(values);
+        console.log(requestURL);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -135,7 +163,7 @@ const FoodFinder = () => {
             .then((data) => {
                 let task_id:string = data['task_id'];
                 let resultURL:string = requestURL + `/result/${task_id}`;
-                getResults(resultURL, task_id);
+                callGetResults(resultURL);
             })
             .catch( (err) => {
                 setQueryStatus("Failed");
@@ -213,8 +241,9 @@ const FoodFinder = () => {
                     if (results === null){
                         console.log("it is null");
                     }
-                    console.log(results);
-                    console.log(queryStatus);
+                    // console.log(results);
+                    // console.log(queryStatus);
+                    // console.log
                     }}>
                 Test
             </Button>

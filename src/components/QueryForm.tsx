@@ -76,6 +76,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                                 )}>
                                 <option>Random</option>
                                 <option>Semantic</option>
+                                <option>Top Rated</option>
                             </Input>
                             <FormText>{`Semantic: Search restaurants that are similar to your query | Random: Returns restaurants randomly`}</FormText> 
                         </FormGroup>

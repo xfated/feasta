@@ -40,7 +40,7 @@ const Navigation = () => {
                     </NavItem>       */}
                 </Nav>
             </Navbar>  
-            <Modal isOpen={infoModalOpen} toggle={toggleInfoModal} className="modal-w80">
+            <Modal isOpen={infoModalOpen} toggle={toggleInfoModal} className="info-modal modal-w80">
                 <ModalHeader toggle={toggleInfoModal}>
                     Information
                 </ModalHeader>
