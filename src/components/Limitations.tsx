@@ -52,7 +52,7 @@ const Limitations = () => {
                     <div className="info">
                         <div className="col-12 text-center pt-5">
                             <p id="time-info" className="disclaimer-info">Semantic search only available from 9am to 9pm.</p>
-                            <UncontrolledPopover trigger="hover click" placement="left" target="time-info">
+                            <UncontrolledPopover trigger="hover click" placement="top" target="time-info">
                                 <PopoverBody>
                                     Because hosting is expensive.
                                 </PopoverBody>
@@ -60,7 +60,7 @@ const Limitations = () => {
                         </div>
                         <div className="col-12 text-center">
                             <p id="semantic-info" className="disclaimer-info">Searching outside specific region/postal will give the best results for semantic matching!</p>
-                            <UncontrolledPopover trigger="hover click" placement="left" target="semantic-info">
+                            <UncontrolledPopover trigger="hover click" placement="top" target="semantic-info">
                                 <PopoverBody>
                                     Might not have data on relevant restaurants in particular areas. As such, even the closest matches might not be the <i><b>best</b></i><br />
                                     Limited by data availability :(
