@@ -217,24 +217,11 @@ const FoodFinder = () => {
     return(
         <>  
             <div className="divider"></div>
-            <div className="section-header col-12 text-center">
+            <div className="section-header col-12 text-center pb-3">
                 <div className="col-12 flex flex-horizontal-center mb-3">
                     <h1 className="mb-0 col-6 col-sm-4 header-underline">Where to feast?</h1>
                 </div>
                 <p>Options for when you're out of options.</p>
-                <p id="time-info"><small>P.S. Semantic search only available from 9am to 9pm.</small></p>
-                <UncontrolledPopover trigger="hover click" placement="bottom" target="time-info">
-                    <PopoverBody>
-                        Because hosting is expensive.
-                    </PopoverBody>
-                </UncontrolledPopover>
-                <p id="semantic-info"><small>Not specifying region/postal will give the best results for semantic matching!</small></p>
-                <UncontrolledPopover trigger="hover click" placement="bottom" target="semantic-info">
-                    <PopoverBody>
-                        Might not have data on relevant restaurants in particular areas. As such, even the closest matches might not be the <i><b>best</b></i><br />
-                        Limited by data availability :(
-                    </PopoverBody>
-                </UncontrolledPopover>
             </div>
             <Limitations />
             <div className="query-container pb-5">
@@ -267,7 +254,8 @@ const FoodFinder = () => {
                     <QueryDisplay />
                 </div>
             </div>
-            <Button style={{backgroundColor:'green', zIndex:1}} onClick={() => {
+            {/* Test button */}
+            {/* <Button style={{backgroundColor:'green', zIndex:1}} onClick={() => {
                     if (results === null){
                         console.log("it is null");
                     }
@@ -276,7 +264,7 @@ const FoodFinder = () => {
                     // console.log
                     }}>
                 Test
-            </Button>
+            </Button> */}
         </>
     )
 }
