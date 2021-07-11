@@ -1,9 +1,9 @@
 .wrapper {
     width: 70vw;
-    height: 200px;
+    height: 300px;
     position: relative;
     border-radius: 20px;
-    border: 1px solid var(--icon);
+    border: 2px solid rgb(235, 221, 116);
 }
 
 .display-temp, .info {
@@ -15,14 +15,14 @@
 }
 
 .disclaimer {
-    height: 200px;
+    height: 100%;
     position: relative;
     text-align: center;
 }
 .disclaimer-img {
     height: 100%;
     position: absolute;
-    bottom: -10;
+    top: 10;
     padding-bottom: 2px;
 }
 .disclaimer-text-box {
@@ -36,12 +36,13 @@
 }
 
 
-.display-bg {
-    color: rgba(196, 196, 196, 0.467);
+.disclaimer-bg {
+    /* color: rgba(196, 196, 196, 0.467); */
+    opacity: 0.2;
 }
 
 .info {
-    background: rgba(115, 125, 126, 0.878) !important;
+    background: rgba(227, 230, 230, 0.542) !important;
     border-radius: 20px;
     z-index: 10;
 }
