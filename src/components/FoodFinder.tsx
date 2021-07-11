@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './FoodFinder.css';
 import QueryForm from './QueryForm';
 import RestaurantInfo from './RestaurantInfo';
-import { Button, Spinner } from 'reactstrap';
+import Limitations from './Limitations';
+import { Button, Spinner, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // Define interfaces for our results
@@ -25,7 +26,7 @@ export interface Query {
     query: string;
 }
 
-var url:string = "http://127.0.0.1:8000";
+var base_url:string = "http://127.0.0.1:8000";
 
 const FoodFinder = () => {
     
@@ -108,8 +109,9 @@ const FoodFinder = () => {
     }
 
     const handleQuery = (values: Query) => {
-        setQueryStatus("Loading")
-        let end_point:string = ""
+        setQueryStatus("Loading");
+        setNumDisplay(5);
+        let end_point:string = "";
         console.log(values.querytype);
         if (values.querytype === "Top Rated"){
             // Postal selected
@@ -143,10 +145,10 @@ const FoodFinder = () => {
             else 
                 end_point = "restFinder"
         }
-        let requestURL:string = url + `/${end_point}`;
+        let requestURL:string = base_url + `/${end_point}`;
         let predictURL:string = requestURL + '/predict';
         // console.log(values);
-        console.log(requestURL);
+        // console.log(requestURL);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -162,7 +164,7 @@ const FoodFinder = () => {
             .then(response => response.json())
             .then((data) => {
                 let task_id:string = data['task_id'];
-                let resultURL:string = requestURL + `/result/${task_id}`;
+                let resultURL:string = base_url + `/result/${task_id}`;
                 callGetResults(resultURL);
             })
             .catch( (err) => {
@@ -174,11 +176,25 @@ const FoodFinder = () => {
         // alert("Submission:" + JSON.stringify(values));
     }   
 
-    // const [queryDisplay, setQueryDisplay] = 
+    // Display results
+    const [numDisplay, setNumDisplay] = useState(5);
     const QueryDisplay = () => {
         if (queryStatus === 'Success' && results != null) {
             return (
-                <RestaurantInfo results={results}/>
+                <div>
+                    <div className="w-100 flex flex-horizontal-center">
+                        <p>{results.length} results found</p>
+                    </div>
+                    <RestaurantInfo results={results} numDisplay={numDisplay}/>
+                    { results.length > numDisplay && 
+                        <div className="w-100 flex flex-horizontal-center">
+                            <Button onClick={() => setNumDisplay(numDisplay + 5)} className="button more-button pt-0 pb-0">
+                                More <br />
+                                <i className="fa fa-angle-down"></i>
+                            </Button>
+                        </div>
+                    }
+                </div>
             )
         } 
         if (queryStatus === 'Loading') {
@@ -206,7 +222,21 @@ const FoodFinder = () => {
                     <h1 className="mb-0 col-6 col-sm-4 header-underline">Where to feast?</h1>
                 </div>
                 <p>Options for when you're out of options.</p>
+                <p id="time-info"><small>P.S. Semantic search only available from 9am to 9pm.</small></p>
+                <UncontrolledPopover trigger="hover click" placement="bottom" target="time-info">
+                    <PopoverBody>
+                        Because hosting is expensive.
+                    </PopoverBody>
+                </UncontrolledPopover>
+                <p id="semantic-info"><small>Not specifying region/postal will give the best results for semantic matching!</small></p>
+                <UncontrolledPopover trigger="hover click" placement="bottom" target="semantic-info">
+                    <PopoverBody>
+                        Might not have data on relevant restaurants in particular areas. As such, even the closest matches might not be the <i><b>best</b></i><br />
+                        Limited by data availability :(
+                    </PopoverBody>
+                </UncontrolledPopover>
             </div>
+            <Limitations />
             <div className="query-container pb-5">
                 <QueryForm handleQuery={handleQuery}/>
             </div>

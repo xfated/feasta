@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Button, Label, Form, FormGroup, Input, FormFeedback, FormText,
-        InputGroup, InputGroupButtonDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
+        InputGroup, InputGroupButtonDropdown, DropdownMenu, DropdownToggle, DropdownItem,
+        UncontrolledPopover, PopoverBody } from 'reactstrap';
 import './QueryForm.css';
 import { Query } from './FoodFinder';
 
@@ -75,10 +76,25 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                                     querytype:e.target.value}
                                                 )}>
                                 <option>Random</option>
-                                <option>Semantic</option>
                                 <option>Top Rated</option>
+                                <option>Semantic</option>
                             </Input>
-                            <FormText>{`Semantic: Search restaurants that are similar to your query | Random: Returns restaurants randomly`}</FormText> 
+                            {query.querytype === "Random" &&
+                                <FormText>Returns restaurants randomly</FormText>
+                            }
+                            {query.querytype === "Top Rated" &&
+                                <FormText>Returns restaurants with highest ratings
+                                    <i className="fa fa-question-circle fa-lg pl-1 pr-1" id="rating-info"></i>
+                                    <UncontrolledPopover trigger="hover click" placement="bottom" target="rating-info">
+                                        <PopoverBody>
+                                            Average rating of all reviews that I could find
+                                        </PopoverBody>
+                                    </UncontrolledPopover>
+                                </FormText>
+                            }
+                            {query.querytype === "Semantic" &&
+                                <FormText>Search restaurants that are similar to your query</FormText>
+                            }
                         </FormGroup>
                         <FormGroup className="mt-2 col-12 col-md-4 mt-md-0">
                             <Label htmlFor="postalregion">&nbsp;Postal / Region</Label>
@@ -126,17 +142,19 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                 <FormText>Region of Singapore</FormText> }
                         </FormGroup>
                     </Row>
-                    <Row className="mt-2">
-                        <FormGroup className="col-12">
-                            <Label htmlFor="query">&nbsp;Query</Label>
-                            <Input type="textarea" id="query" name="query" value={query.query}
-                                placeholder="Your query here" rows={4}
-                                onChange={(e) => setQuery({
-                                                    ...query,
-                                                    query:e.target.value}
-                                                )}/>
-                        </FormGroup>
-                    </Row>
+                    { query.querytype === 'Semantic' &&
+                        <Row className="mt-2">
+                            <FormGroup className="col-12">
+                                <Label htmlFor="query">&nbsp;Query</Label>
+                                <Input type="textarea" id="query" name="query" value={query.query}
+                                    placeholder="Your query here" rows={4}
+                                    onChange={(e) => setQuery({
+                                                        ...query,
+                                                        query:e.target.value}
+                                                    )}/>
+                            </FormGroup>
+                        </Row>
+                    }
                     <Row className="mt-3 flex flex-horizontal-center">
                         <Button outline type="submit" value="submit" color="secondary" 
                                 disabled={!validSubmit} className="mt-3 col-3">

@@ -4,6 +4,13 @@
 
 .section-header{
     background-color: var(--background0);
+    position: relative;
+}
+
+.info-alert{
+    position: absolute;
+    top: 1;
+    right: 0;
 }
 
 .header-underline{
@@ -35,4 +42,15 @@
 .waitphrase-exit-active {
     opacity:0.01;
     transition: all 500ms ;
+}
+
+.more-button {
+    background-color: var(--background0);
+    color: var(--darkbg);
+    border-bottom: var(--highlight);
+    background:linear-gradient(transparent,rgba(225, 225, 225, 0.823));
+}
+.more-button:hover {
+    background-color: var(--background0);
+    color: var(--darkbg);
 }

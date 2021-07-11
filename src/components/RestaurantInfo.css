@@ -31,3 +31,7 @@
 .rest-container{
     position: relative;
 }
+
+.summary-info {
+    color: var(--icon);
+}
