@@ -56,14 +56,14 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
     return(
         <>
             <div className="container">
-                <Form onSubmit = {(e) => submitQuery(e)}>
+                <Form onSubmit = {(e: React.FormEvent) => submitQuery(e)}>
                     <Row>
                         <FormGroup className="col-12 col-md-4 mt-2 mt-md-0">
                             <Label htmlFor="topk">&nbsp;Number of Results</Label>
                             <Input type="number" id="topk" name="topk" min="0" value={query.topk}
                                 placeholder="Number of results to retrieve"
-                                onChange={(e) => setQuery({...query,
-                                                        topk:parseInt(e.target.value)}
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => setQuery({...query,
+                                                        topk:parseInt(e.currentTarget.value)}
                                 )}/>
                             <FormText>Number of restaurants to return</FormText>
                         </FormGroup>
@@ -71,9 +71,9 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                             <Label htmlFor="querytype">&nbsp;Query Type</Label>
                             <Input type="select" id="querytype" name="querytype" value={query.querytype}
                                 placeholder="Random or Semantic search"
-                                onChange={(e) => setQuery({
+                                onChange={(e: React.FormEvent<HTMLInputElement>) => setQuery({
                                                     ...query,
-                                                    querytype:e.target.value}
+                                                    querytype:e.currentTarget.value}
                                                 )}>
                                 <option>Random</option>
                                 <option>Top Rated</option>
@@ -112,18 +112,18 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                     <Input type="text" id="postalregion" name="postalregion" value={query.postal}
                                         placeholder="Postal Code"
                                         invalid={!postalValid}
-                                        onChange={(e) => {
-                                            validatePostal(e.target.value);
+                                        onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                            validatePostal(e.currentTarget.value);
                                             setQuery({...query,
-                                                postal:e.target.value});
+                                                postal:e.currentTarget.value});
                                         }}/>
                                     :
                                     <Input type="select" id="region" name="region" value={query.region}
                                         placeholder="Region"
-                                        onChange={(e) => setQuery({
+                                        onChange={(e: React.FormEvent<HTMLInputElement>) => setQuery({
                                                             ...query,
                                                             postal:'',
-                                                            region:e.target.value}
+                                                            region:e.currentTarget.value}
                                                         )}>
                                         <option></option>
                                         <option>North-East</option>
@@ -133,9 +133,10 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                         <option>East</option>
                                     </Input>
                                 }
-                            </InputGroup>
                             { (postalregion === 'Postal') && 
-                                <FormFeedback>Invalid postal code. Please input 3 digits or simply leave the field empty</FormFeedback> }
+                                <FormFeedback>Invalid postal code. Please input 3 digits or simply leave the field empty</FormFeedback>
+                            }
+                            </InputGroup>
                             { (postalregion === 'Postal') &&     
                                 <FormText>First 2 digits of postal code area you wish to search</FormText> }
                             { (postalregion === 'Region') &&     
@@ -148,9 +149,9 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                 <Label htmlFor="query">&nbsp;Query</Label>
                                 <Input type="textarea" id="query" name="query" value={query.query}
                                     placeholder="Your query here" rows={4}
-                                    onChange={(e) => setQuery({
+                                    onChange={(e: React.FormEvent<HTMLInputElement>) => setQuery({
                                                         ...query,
-                                                        query:e.target.value}
+                                                        query:e.currentTarget.value}
                                                     )}/>
                             </FormGroup>
                         </Row>

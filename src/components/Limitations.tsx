@@ -10,9 +10,7 @@ const Limitations = () => {
         const rect = e.getBoundingClientRect();
         // if within desired range
         if (rect.top >= (window.innerHeight || document.documentElement.clientHeight)*(1/10) &&
-            rect.left >= 0 &&
-            rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight)*(6/7))&&
-            rect.right <= ((window.innerWidth || document.documentElement.clientWidth))
+            rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight)*(6/7))
             ){
             setShowInfo(true);
         }
@@ -36,8 +34,8 @@ const Limitations = () => {
     return (
         <div className="w-100 flex flex-horizontal-center pb-5">
             <div className="wrapper" >
-                <div className={`disclaimer flex flex-horizontal-center` + `${showInfo ? ' disclaimer-bg' : ''}`}>
-                    <img src={"/assets/images/disclaimer.jpg"} className="disclaimer-img">
+                <div className={`disclaimer flex flex-horizontal-center ${showInfo ? ' disclaimer-bg' : ''}`}>
+                    <img src={"/assets/images/disclaimer.jpg"} alt="decorative" className="disclaimer-img">
                     </img>
                     <div className="disclaimer-text-box">
                         <h4 className="display-4">Setting Expectations</h4>

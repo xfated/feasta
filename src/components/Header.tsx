@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Jumbotron } from 'reactstrap';
-import { CSSTransition } from "react-transition-group";
 import './Header.css';
 
 const Header = () => {

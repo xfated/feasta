@@ -8,7 +8,7 @@ interface RestaurantInfoProps {
     numDisplay: number
 }
 
-const RestaurantInfo: React.FC<RestaurantInfoProps> = (props) => {
+const RestaurantInfo = (props: RestaurantInfoProps) => {
     const RestInfo = props.results != null ? props.results.map((result, i) => {
             // console.log(result.summary);
             if (i < props.numDisplay) {

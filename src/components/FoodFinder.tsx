@@ -3,7 +3,8 @@ import './FoodFinder.css';
 import QueryForm from './QueryForm';
 import RestaurantInfo from './RestaurantInfo';
 import Limitations from './Limitations';
-import { Button, Spinner, UncontrolledPopover, PopoverBody } from 'reactstrap';
+import FeedbackForm from './FeedbackForm';
+import { Button, Spinner } from 'reactstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // Define interfaces for our results
@@ -219,7 +220,7 @@ const FoodFinder = () => {
             <div className="divider"></div>
             <div className="section-header col-12 text-center pb-3">
                 <div className="col-12 flex flex-horizontal-center mb-3">
-                    <h1 className="mb-0 col-6 col-sm-4 header-underline">Where to feast?</h1>
+                    <h1 className="mb-0 col-6 col-sm-5 header-underline">Where to feast?</h1>
                 </div>
                 <p>Options for when you're out of options.</p>
             </div>
@@ -265,6 +266,7 @@ const FoodFinder = () => {
                     }}>
                 Test
             </Button> */}
+            <FeedbackForm/>
         </>
     )
 }
