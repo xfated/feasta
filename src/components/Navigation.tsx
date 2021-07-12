@@ -52,7 +52,7 @@ const Navigation = () => {
                                 <div className="col-12 col-md-3">
                                     <h4>Origins</h4>
                                 </div>
-                                <div className="col-12 col-md-9">
+                                <div className="col-12 col-md-9 text-center">
                                     <p>To be blunt, this was inspired by my abundance of indecisiveness when it comes to food. </p>
                                     <p>More than once, my friends and I have wandered aimlessly simply because we could not decide on what to eat. 
                                        And in the rare cases I knew what I wanted, it felt like a chore to sieve through multiple review sites to find nice suggestions.
@@ -65,7 +65,7 @@ const Navigation = () => {
                                 <div className="col-12 col-md-3 order-md-2">
                                     <h4>Purpose</h4>
                                 </div>
-                                <div className="col-12 col-md-9">
+                                <div className="col-12 col-md-9 text-center">
                                     <p>I want suggestions.</p>
                                     <p>I want suggestions catered to my immediate interests.</p>
                                     <p>I knew what I wanted. So I made this website.</p>
@@ -81,10 +81,10 @@ const Navigation = () => {
                                 <div className="col-12 col-md-3">
                                     <h4>Behind the scenes</h4>
                                 </div>
-                                <div className="col-12 col-md-9">
+                                <div className="col-12 col-md-9 text-center">
                                     <p>A deep learning model trained on restaurant reviews.</p>
                                     <p>Thought process: Reviews should include mentions of what people enjoyed at a restaurant.
-                                        If others' enjoy it, probably I would enjoy it too.
+                                        If others' enjoyed it, I would probably enjoy it too.
                                     </p>
                                 </div>      
                             </div>

@@ -52,7 +52,10 @@ const RestaurantInfo: React.FC<RestaurantInfoProps> = (props) => {
                             {result.summary}
                         </p>
                     </div>
-                )
+                );
+            }
+            else {
+                return (<div></div>);
             }
         }) : (<div></div>);
 
