@@ -49,7 +49,7 @@ const Navigation = () => {
                     <ListGroup flush>
                         <ListGroupItem key={1} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
-                                <div className="col-12 col-md-3">
+                                <div className="col-12 col-md-3 text-center">
                                     <h4>Origins</h4>
                                 </div>
                                 <div className="col-12 col-md-9 text-center">
@@ -62,7 +62,7 @@ const Navigation = () => {
                         </ListGroupItem>
                         <ListGroupItem key={2} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
-                                <div className="col-12 col-md-3 order-md-2">
+                                <div className="col-12 col-md-3 order-md-2 text-center">
                                     <h4>Purpose</h4>
                                 </div>
                                 <div className="col-12 col-md-9 text-center">
@@ -78,7 +78,7 @@ const Navigation = () => {
                         </ListGroupItem>
                         <ListGroupItem key={3} className="mt-2 mb-2">
                             <div className="row flex flex-vertical-center">
-                                <div className="col-12 col-md-3">
+                                <div className="col-12 col-md-3 text-center">
                                     <h4>Behind the scenes</h4>
                                 </div>
                                 <div className="col-12 col-md-9 text-center">
