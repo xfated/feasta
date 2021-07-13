@@ -116,6 +116,12 @@ const FoodFinder = () => {
                             setFetchResults(false);
                             // console.log('success');
                         }
+                        else if (tries >= 5){
+                            setTries(0);
+                            setFetchResults(false);
+                            setQueryStatus("Failed");
+                            setFailureMessage("Query took too long. Weird. Please try again!");
+                        }
                         else {
                             setTries(tries + 1);
                         }

@@ -11,7 +11,7 @@
 .rest-like {
     position: absolute;
     top: 1;
-    right: 60px;
+    right: 40px;
 }
 
 
@@ -41,3 +41,18 @@
 .summary-info {
     color: var(--icon);
 }
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+    .rest-like{
+        right: 60px;
+    }
+}
+   
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .rest-like{
+        right: 60px;
+    }
+}
+  

@@ -38,10 +38,10 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                         }
                         <h2 className="w-100">
                             <div className="row">
-                                <div className="rest-title col-7 col-md-5">
+                                <div className="rest-title col-6 col-md-5">
                                     <b>{result.name}</b>
                                 </div>
-                                <div className="rest-info col-3">
+                                <div className="rest-info col-4">
                                     <small>Rating: {result.rating.toFixed(2)} / 5</small>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                                 </div>
                                 <div className="col-1">
                                     <i className="fa fa-question-circle fa-lg pl-1 pr-1 mt-2 summary-info" id={`summary-info-${i}`}></i>
-                                    <UncontrolledPopover trigger="hover click" placement="bottom" target={`summary-info-${i}`}>
+                                    <UncontrolledPopover trigger="click hover" placement="bottom" target={`summary-info-${i}`}>
                                         <PopoverBody>
                                             Most semantically 'central' sentences in all reviews (that I have) of <b>{result.name}</b>
                                         </PopoverBody>
