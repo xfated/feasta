@@ -6,8 +6,14 @@
     position: absolute;
     top: 1;
     right: 0;
-    font-size: 20px;
 }
+
+.rest-like {
+    position: absolute;
+    top: 1;
+    right: 60px;
+}
+
 
 .rest-button {
     border: none;

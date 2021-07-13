@@ -12,6 +12,7 @@ const FeedbackForm = () => {
     const [feedbackType, setFeedbackType] = useState('');
     const submitFeedback = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log(process.env.REACT_APP_apiKey);
         AddFeedback(feedback, feedbackType);
     }
 
@@ -23,9 +24,9 @@ const FeedbackForm = () => {
                 </div>
                 <p>Appreciate any form of input!</p>
             </div>
-            <div className="container">
+            <div className="container mb-5">
                 <Form onSubmit = {(e: React.FormEvent) => submitFeedback(e)}>
-                        <Row>
+                    <Row>
                         <FormGroup className="col-12  mt-2 mt-md-0">
                             <Label htmlFor="feedbacktype">&nbsp;Type</Label>
                             <Input type="select" id="feedbacktype" name="feedbacktype" value={feedbackType}

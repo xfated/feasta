@@ -54,3 +54,7 @@
     background-color: var(--background0);
     color: var(--darkbg);
 }
+
+.hide-overflow {
+    overflow: hidden;
+}

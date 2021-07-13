@@ -4,6 +4,7 @@ import QueryForm from './QueryForm';
 import RestaurantInfo from './RestaurantInfo';
 import Limitations from './Limitations';
 import FeedbackForm from './FeedbackForm';
+import { AddQuery } from './firestore_utils';
 import { Button, Spinner } from 'reactstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -18,7 +19,7 @@ export interface QueryResult {
     rating:number
 }
 
-// type QueryType = "Random" | "Semantic";
+// type QueryType = "Random" | "Semantic" | "Top K";
 export interface Query {
     postal: string;
     region: string;
@@ -27,7 +28,8 @@ export interface Query {
     query: string;
 }
 
-var base_url:string = "http://127.0.0.1:8000";
+const base_url = process.env.REACT_APP_baseURL;
+const logQueries = true;
 
 const FoodFinder = () => {
     
@@ -38,11 +40,18 @@ const FoodFinder = () => {
     type queryStatusType = "Start" | "Loading" | "Failed" | "Success";
     const [queryStatus, setQueryStatus] = useState<queryStatusType>("Start");
     const [failureMessage, setFailureMessage] = useState<null | string>(null);
+    const [queryType, setQueryType] = useState(''); // To identify if want to record matching
+    const [query, setQuery] = useState('');
+
     // For loading
     const waitPhrases = [
         "Interviewing strangers on the street...",
         "Trying out the food...",
         "Searching for restaurants...",
+        "Distracted by neighbourhood cats...",
+        "Stopped at the traffic light...",
+        "Inspecting breadcrumbs...",
+        "Drinking some coffee..."
     ]
     const [waitPhraseIdx, setWaitPhraseIdx] = useState(0);
     
@@ -60,7 +69,9 @@ const FoodFinder = () => {
     // Function to make request and store results
     // Use interval polling to fetch result
     const [tries, setTries] = useState(0);
-    async function getResults(resultURL:string){
+    const [resultURL, setResultURL] = useState('');
+    const [fetchResults, setFetchResults] = useState(false);
+    async function getResults(){
         const resultOptions = {
             method: 'GET',
         }
@@ -77,8 +88,14 @@ const FoodFinder = () => {
             return false; 
         }
         let status:string = data['status']
-        // console.log(data);
-        // console.log(status);
+        let err:string = data['error']
+        // console.log(err);
+        if ( err === "ConnectionError") {
+            setQueryStatus("Failed");
+            setFailureMessage("Language model is not available at the moment");
+            // console.log('failed');
+            return false;
+        }
         if (status !== "Processing") {
             setResults(data['preds']);
             setQueryStatus("Success");
@@ -88,32 +105,37 @@ const FoodFinder = () => {
         }
         return false;
     }
-    function callGetResults(resultURL:string) {
-        // Get results
-        const getResult = setInterval(() => {
-            // console.log(`try: ${tries}`);
-            getResults(resultURL)
-                .then((success) => {
-                    if (success || tries > 10) {
-                        clearInterval(getResult);
-                        setTries(0);
-                        // console.log('success');
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    setTries(tries + 1);
-                });
-            setTries(tries + 1);
-        }, 500);   
-
-    }
+    useEffect(() => {
+        if (fetchResults){
+            const callGetResult = setTimeout(() => {
+                console.log(`Getting results try: ${tries}`);
+                getResults()
+                    .then((success) => {
+                        if (success || tries >= 5) {
+                            setTries(0);
+                            setFetchResults(false);
+                            // console.log('success');
+                        }
+                        else {
+                            setTries(tries + 1);
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        setTries(tries + 1);
+                    });  
+            }, 2000);   
+            return () => {
+                clearTimeout(callGetResult);
+            }
+        }
+    }, [fetchResults, tries])
 
     const handleQuery = (values: Query) => {
         setQueryStatus("Loading");
         setNumDisplay(5);
+        setTries(0);
         let end_point:string = "";
-        console.log(values.querytype);
         if (values.querytype === "Top Rated"){
             // Postal selected
             if (values.postal.length !== 0){
@@ -165,15 +187,23 @@ const FoodFinder = () => {
             .then(response => response.json())
             .then((data) => {
                 let task_id:string = data['task_id'];
-                let resultURL:string = base_url + `/result/${task_id}`;
-                callGetResults(resultURL);
+                // let resultURL:string = base_url + `/result/${task_id}`;
+                setResultURL(base_url + `/result/${task_id}`);
+                setFetchResults(true);
+
+                setQueryType(values.querytype);
+                setQuery(values.query);
+                // Store query on successful submits
+                if (logQueries){
+                    AddQuery(values.query, values.postal, values.topk, values.querytype, values.region);
+                }
             })
             .catch( (err) => {
                 setQueryStatus("Failed");
                 setFailureMessage(err.toString());
                 console.log(err);
             });
-        
+
         // alert("Submission:" + JSON.stringify(values));
     }   
 
@@ -184,9 +214,12 @@ const FoodFinder = () => {
             return (
                 <div>
                     <div className="w-100 flex flex-horizontal-center">
-                        <p>{results.length} results found</p>
+                        <p className="mb-0">{results.length} results found</p>
                     </div>
-                    <RestaurantInfo results={results} numDisplay={numDisplay}/>
+                    <div className="col-12 text-center pb-3">
+                        <p className="disclaimer-info">Please 'Like' the search result if you think it matches your query well!</p>
+                    </div>
+                    <RestaurantInfo results={results} numDisplay={numDisplay} queryType={queryType} query={query}/>
                     { results.length > numDisplay && 
                         <div className="w-100 flex flex-horizontal-center">
                             <Button onClick={() => setNumDisplay(numDisplay + 5)} className="button more-button pt-0 pb-0">
@@ -228,8 +261,8 @@ const FoodFinder = () => {
             <div className="query-container pb-5">
                 <QueryForm handleQuery={handleQuery}/>
             </div>
-            <div className="results-container w-100">
-                <div className="row flex flex-horizontal-center">
+            <div className="results-container hide-overflow">
+                <div className="row pr-0 pl-0 flex flex-horizontal-center">
                     { (queryStatus === "Loading") && 
                         <div className="col-12 flex flex-horizontal-center mb-5">
                             <Spinner style={{ width: '3rem', height: '3rem' }} />
@@ -238,10 +271,10 @@ const FoodFinder = () => {
                     <div className="col-12 text-center">              
                         <TransitionGroup>
                             <CSSTransition
-                                    timeout={1000}
-                                    key={waitPhraseIdx}
-                                    classNames="waitphrase"
-                                    >    
+                                timeout={1000}
+                                key={waitPhraseIdx}
+                                classNames="waitphrase"
+                                >    
                                 {   (queryStatus === "Loading") ?                     
                                         <span>
                                             {waitPhrases[waitPhraseIdx]}
@@ -266,7 +299,9 @@ const FoodFinder = () => {
                     }}>
                 Test
             </Button> */}
-            <FeedbackForm/>
+            <div className="hide-overflow">
+                <FeedbackForm/>
+            </div>
         </>
     )
 }

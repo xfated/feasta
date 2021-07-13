@@ -12,7 +12,7 @@ interface PropsFunction {
 const QueryForm = ({ handleQuery }: PropsFunction) => {
     const [query, setQuery] = useState({
         postal: "",
-        topk: 0,
+        topk: 5,
         querytype: "Random",
         query: "",
         region: "",

@@ -25,7 +25,7 @@ const Navigation = () => {
     }, [])
 
     return (
-        <div className="container-fluid px-0">
+        <div>
             <Navbar className={`navbar-overlap w-100 ${navHidden && 'nav-hidden'}`}>
                 <Nav className="ml-auto" navbar>
                     <NavItem>

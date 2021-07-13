@@ -1,15 +1,19 @@
 import React from 'react';
 import { Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import './RestaurantInfo.css';
+import { AddGoodMatch } from './firestore_utils';
 import { QueryResult } from './FoodFinder';
 
 interface RestaurantInfoProps {
     results: Array<QueryResult> | null,
-    numDisplay: number
+    numDisplay: number,
+    queryType: string,
+    query: string
 }
 
 const RestaurantInfo = (props: RestaurantInfoProps) => {
     const RestInfo = props.results != null ? props.results.map((result, i) => {
+
             // console.log(result.summary);
             if (i < props.numDisplay) {
                 return (
@@ -19,6 +23,19 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                                 <i className="fa fa-external-link-square fa-lg fa-fw"></i>
                             </Button>
                         </a>
+                        { props.queryType === "Semantic" && 
+                            <Button className="rest-like rest-button" 
+                                    onClick={() => {
+                                        AddGoodMatch(props.query, result.name, result.address)
+                                    }}>
+                                <i className="fa fa-heart fa-lg fa-fw" id={`like-rest-${i}`}></i>
+                                <UncontrolledPopover trigger="hover click" placement="bottom" target={`like-rest-${i}`}>
+                                    <PopoverBody>
+                                        Give a like if think this is a good recommendation!
+                                    </PopoverBody>
+                                </UncontrolledPopover>
+                            </Button>
+                        }
                         <h2 className="w-100">
                             <div className="row">
                                 <div className="rest-title col-7 col-md-5">
