@@ -134,7 +134,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                     </Input>
                                 }
                             { (postalregion === 'Postal') && 
-                                <FormFeedback>Invalid postal code. Please input 3 digits or simply leave the field empty</FormFeedback>
+                                <FormFeedback>Invalid postal code. Please input 2 digits or simply leave the field empty</FormFeedback>
                             }
                             </InputGroup>
                             { (postalregion === 'Postal') &&     

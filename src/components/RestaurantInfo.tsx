@@ -18,7 +18,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
             if (i < props.numDisplay) {
                 return (
                     <div className="row rest-container border-bottom mb-4" key={i}>
-                        <a href={result.link} className="rest-link">
+                        <a href={`https://google.com/search?q=${result.name}`} className="rest-link">
                             <Button className="rest-button">
                                 <i className="fa fa-external-link-square fa-lg fa-fw"></i>
                             </Button>

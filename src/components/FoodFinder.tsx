@@ -111,7 +111,7 @@ const FoodFinder = () => {
                 console.log(`Getting results try: ${tries}`);
                 getResults()
                     .then((success) => {
-                        if (success || tries >= 5) {
+                        if (success) {
                             setTries(0);
                             setFetchResults(false);
                             // console.log('success');
@@ -128,7 +128,15 @@ const FoodFinder = () => {
                     })
                     .catch((err) => {
                         console.log(err);
-                        setTries(tries + 1);
+                        if (tries >= 5){
+                            setTries(0);
+                            setFetchResults(false);
+                            setQueryStatus("Failed");
+                            setFailureMessage("Query took too long. Weird. Please try again!");
+                        }
+                        else {
+                            setTries(tries + 1);
+                        }
                     });  
             }, 2000);   
             return () => {
