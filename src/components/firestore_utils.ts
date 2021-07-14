@@ -1,8 +1,6 @@
-import { DocumentReference, QuerySnapshot } from '@firebase/firestore-types';
+import { DocumentReference } from '@firebase/firestore-types';
 import { db } from '../index';
 import firebase from "firebase/app";
-import { Query } from '@testing-library/react';
-import { ReviewInterface } from './Reviews';
 
 /* Add feedback */
 export const AddFeedback = (feedback: string, type: string) => {
@@ -82,40 +80,3 @@ export const AddComment = ( restaurant_name: string,
                         console.error("Error adding document: ", error);
                     });
 }
-
-export const GetReviews = ( restaurant_name: string,
-                            address: string,
-                        ): ReviewInterface[] => {
-    // Get address
-    restaurant_name = restaurant_name.replace(/[^a-zA-Z0-9 \n\.]/g, '').toLowerCase().replaceAll(' ','_'); 
-    let postal_code = address.match(/Singapore [0-9]{6,6}/);
-    let unit = address.match(/#[0-9\-]+/);
-    if (postal_code === null || unit === null){
-        return [];
-    } 
-    let postal = postal_code[0].split(" ")[1];
-    let unit_number = unit[0];
-    let restaurant_key: string = `${restaurant_name}_${postal}_${unit_number}`;
-
-    const restRef = db.collection('restaurants').doc(restaurant_key);
-    restRef.collection('comments').orderBy("created","desc")
-        .onSnapshot((querySnapshot: QuerySnapshot) => {
-            if (!querySnapshot.empty) {
-                let reviews: ReviewInterface[] = [];
-                querySnapshot.forEach((snap) => {
-                    reviews.push({
-                        review: snap.data().review,
-                        created: snap.data().created,
-                        rating: snap.data().rating
-                    })
-                })
-                console.log(reviews);
-                return reviews;
-            }
-            return [];
-        },
-        error => {
-            console.log(error);
-        })
-    return [];
-};

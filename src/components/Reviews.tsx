@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Button, Label, Form, FormGroup, Input, FormFeedback, FormText,
     UncontrolledPopover, PopoverBody } from 'reactstrap';
-import { AddComment} from './firestore_utils';
+import { AddComment } from './firestore_utils';
 import './Reviews.css'
 import { QuerySnapshot } from '@firebase/firestore-types';
 import { db } from '../index';
@@ -18,22 +18,31 @@ export interface ReviewInterface {
 }
 
 const Reviews = (props: CommentsProps) => {
+
     const [review, setReview] = useState('');
-    const [rating, setRating] = useState(5);
+    const [rating, setRating] = useState('Rating');
+    const [reviewValid, setReviewValid] = useState(true);
+    const validateReview = (review: string) => {
+        console.log(review.length)
+        if (review.trim().split(' ').length >= 5 || review.length === 0) {
+            setReviewValid(true);
+            return
+        }
+        setReviewValid(false);
+    }
     const submitComment = (e: React.FormEvent) => {
         e.preventDefault();
-        AddComment(
-            props.restaurant_name,
-            props.address,
-            review,
-            rating,
-        );
+        // AddComment(
+        //     props.restaurant_name,
+        //     props.address,
+        //     review,
+        //     parseInt(rating),
+        // );
         setReview('');
-        console.log('printing reviews');
         console.log(displayReviews);
     }
 
-    const [displayReviews, setDisplayReviews] = useState<Array<ReviewInterface>>();
+    const [displayReviews, setDisplayReviews] = useState<Array<ReviewInterface>>([]);
     useEffect(() => {
         const GetReviews = ( restaurant_name: string,
                                     address: string,
@@ -61,7 +70,6 @@ const Reviews = (props: CommentsProps) => {
                                 rating: snap.data().rating
                                 })  
                             })
-                        console.log(reviews);
                         setDisplayReviews(reviews);
                         return;
                     }
@@ -76,6 +84,13 @@ const Reviews = (props: CommentsProps) => {
         GetReviews(props.restaurant_name, props.address )
     }, [])
 
+    const reviewData = displayReviews?.map((data, idx) => {
+        return (
+            <p>
+                {`${data.review} - ${data.rating}/5 ${data.created}`}
+            </p>
+        )
+    })
     return (
         <>
             <div className="review-info w-100 mb-0">
@@ -84,18 +99,28 @@ const Reviews = (props: CommentsProps) => {
                         <h4><b>Reviews:</b></h4>
                     </div>
                 </div>
+                {
+                    displayReviews && displayReviews.length > 0 && 
+                        reviewData
+                }
             </div> 
             <Form onSubmit = {(e: React.FormEvent) => submitComment(e)}>
                 <Row  >
-                    <FormGroup className="col-8">
+                    <FormGroup className="col-7">
                         <Input type="text" id="review" name="review"value={review}
                             placeholder="Review"
-                            onChange={(e: React.FormEvent<HTMLInputElement>) => setReview(e.currentTarget.value)}/>
+                            invalid={!reviewValid}
+                            onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                                    validateReview(e.currentTarget.value)
+                                    setReview(e.currentTarget.value)}
+                                }/>
+                        <FormFeedback>A good review should not be too short! (More than 5 words)</FormFeedback>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="col-3">
                         <Input type="select" id="region" name="region" value={rating}
                             placeholder="Rating"
-                            onChange={(e: React.FormEvent<HTMLInputElement>) => setRating(parseInt(e.currentTarget.value))}>
+                            onChange={(e: React.FormEvent<HTMLInputElement>) => setRating(e.currentTarget.value)}>
+                            <option>Rating</option>    
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -103,9 +128,9 @@ const Reviews = (props: CommentsProps) => {
                             <option>5</option>
                         </Input>
                     </FormGroup>
-                    <FormGroup className="col-3">
+                    <FormGroup className="col-2">
                         <Button outline type="submit" value="submit" color="secondary"
-                            className="col-12">
+                            disabled={review.length === 0 || rating === 'Rating'} className="col-12">
                             Submit
                         </Button>
                     </FormGroup>
