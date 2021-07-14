@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import './FeedbackForm.css';
 import { Query } from './FoodFinder';
 import { AddFeedback } from './firestore_utils';
-import { Row, Button, Label, Form, FormGroup, Input, FormFeedback, FormText,
-    UncontrolledPopover, PopoverBody } from 'reactstrap';
+import { Row, Button, Label, Form, FormGroup, Input } from 'reactstrap';
 
     
 const FeedbackForm = () => {

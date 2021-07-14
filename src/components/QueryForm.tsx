@@ -87,7 +87,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                     <i className="fa fa-question-circle fa-lg pl-1 pr-1" id="rating-info"></i>
                                     <UncontrolledPopover trigger="hover click" placement="bottom" target="rating-info">
                                         <PopoverBody>
-                                            Average rating of all reviews that I could find
+                                            Average rating of reviews
                                         </PopoverBody>
                                     </UncontrolledPopover>
                                 </FormText>

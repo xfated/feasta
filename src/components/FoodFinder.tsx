@@ -29,7 +29,7 @@ export interface Query {
 }
 
 const base_url = process.env.REACT_APP_baseURL;
-const logQueries = true;
+const logQueries = false;
 
 const FoodFinder = () => {
     
@@ -71,41 +71,43 @@ const FoodFinder = () => {
     const [tries, setTries] = useState(0);
     const [resultURL, setResultURL] = useState('');
     const [fetchResults, setFetchResults] = useState(false);
-    async function getResults(){
-        const resultOptions = {
-            method: 'GET',
-        }
-        let data = null;
-        try {
-            let response = await fetch(resultURL, resultOptions);
-            data = await response.json();
-        } catch (e) {
-            console.error(e);
-            setFailureMessage(e);
-            return false;
-        }
-        if (data === null) {
-            return false; 
-        }
-        let status:string = data['status']
-        let err:string = data['error']
-        // console.log(err);
-        if ( err === "ConnectionError") {
-            setQueryStatus("Failed");
-            setFailureMessage("Language model is not available at the moment");
-            // console.log('failed');
-            return false;
-        }
-        if (status !== "Processing") {
-            setResults(data['preds']);
-            setQueryStatus("Success");
-            // console.log(data['preds']);
-            setFailureMessage(null);
-            return true;
-        }
-        return false;
-    }
+    
     useEffect(() => {
+        async function getResults(){
+            const resultOptions = {
+                method: 'GET',
+            }
+            let data = null;
+            try {
+                let response = await fetch(resultURL, resultOptions);
+                data = await response.json();
+            } catch (e) {
+                console.error(e);
+                setFailureMessage(e);
+                return false;
+            }
+            if (data === null) {
+                return false; 
+            }
+            let status:string = data['status']
+            let err:string = data['error']
+            // console.log(err);
+            if ( err === "ConnectionError") {
+                setQueryStatus("Failed");
+                setFailureMessage("Language model is not available at the moment");
+                // console.log('failed');
+                return false;
+            }
+            if (status !== "Processing") {
+                setResults(data['preds']);
+                setQueryStatus("Success");
+                // console.log(data['preds']);
+                setFailureMessage(null);
+                return true;
+            }
+            return false;
+        }
+
         if (fetchResults){
             const callGetResult = setTimeout(() => {
                 console.log(`Getting results try: ${tries}`);
@@ -143,7 +145,7 @@ const FoodFinder = () => {
                 clearTimeout(callGetResult);
             }
         }
-    }, [fetchResults, tries])
+    }, [fetchResults, tries, resultURL])
 
     const handleQuery = (values: Query) => {
         setQueryStatus("Loading");

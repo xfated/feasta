@@ -1,4 +1,5 @@
 import React from 'react';
+import Reviews from './Reviews';
 import { Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import './RestaurantInfo.css';
 import { AddGoodMatch } from './firestore_utils';
@@ -49,25 +50,35 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                         <div className="w-100 mb-2">
                             <h4 className="mb-0"><b className="rest-info">Address:</b></h4>
                             <span>{result.address}</span>
-                        </div>
-                        <div className="rest-info w-100 mb-0">
-                            <div className="row">
-                                <div className="col-2">
-                                    <h4><b>Summary:</b></h4>
+                        </div>  
+                        <div>
+                            <div className="rest-info w-100 mb-0">
+                                <div className="row">
+                                    <div className="col-2">
+                                        <h4><b>Summary:</b></h4>
+                                    </div>
+                                    <div className="col-1">
+                                        <i className="fa fa-question-circle fa-lg pl-1 pr-1 mt-2 summary-info" id={`summary-info-${i}`}></i>
+                                        <UncontrolledPopover trigger="click hover" placement="bottom" target={`summary-info-${i}`}>
+                                            <PopoverBody>
+                                                Most semantically 'central' sentences in reviews of <b>{result.name}</b>
+                                            </PopoverBody>
+                                        </UncontrolledPopover>
+                                    </div>
                                 </div>
-                                <div className="col-1">
-                                    <i className="fa fa-question-circle fa-lg pl-1 pr-1 mt-2 summary-info" id={`summary-info-${i}`}></i>
-                                    <UncontrolledPopover trigger="click hover" placement="bottom" target={`summary-info-${i}`}>
-                                        <PopoverBody>
-                                            Most semantically 'central' sentences in all reviews (that I have) of <b>{result.name}</b>
-                                        </PopoverBody>
-                                    </UncontrolledPopover>
-                            </div>
-                            </div>
+                            </div>                        
+                            <p className="rest-summary">
+                                {result.summary}
+                            </p>
+                            <p>
+                                <small>
+                                    Reviewed on tripadvisor.com.sg
+                                </small>
+                            </p>
                         </div>
-                        <p className="rest-summary">
-                            {result.summary}
-                        </p>
+                        <div className="w-100">
+                            <Reviews restaurant_name={result.name} address={result.address} />
+                        </div>
                     </div>
                 );
             }
