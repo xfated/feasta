@@ -1,3 +1,33 @@
 .review-info {
     font-family: simplifica, Georgia, 'Times New Roman', Times, serif;
 }
+
+.add-review-form-enter {
+    opacity:0.01;
+    transform: translate(0, -10px);
+}
+.add-review-form-enter-active{
+    opacity:1;
+    transform: translate(0, 0);
+    transition: all 500ms ease-in;
+}
+.add-review-form-exit{
+    transform: translate(0, 0);
+    opacity:1;
+}
+.add-review-form-exit-active {
+    opacity:0.01;
+    transition: all 500ms ease-out;
+    transform: translate(0, -10px);
+}
+
+.review-button:hover {
+    background-color: var(--background0);
+}
+
+.review {
+    /* border: 1px solid rgb(240, 232, 173); */
+    /* border-radius: 10px; */
+    font-family: Times, serif;
+    font-size: small;
+}

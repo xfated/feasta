@@ -52,10 +52,11 @@ export const AddQuery = (query: string,
     });
 }
 
-export const AddComment = ( restaurant_name: string,
+export const AddReview = ( restaurant_name: string,
                             address: string,
-                            comment: string,
+                            review: string,
                             rating: number,
+                            uid: string,
                             ) => {
     // Get address
     restaurant_name = restaurant_name.replace(/[^a-zA-Z0-9 \n\.]/g, '').toLowerCase().replaceAll(' ','_'); 
@@ -68,8 +69,9 @@ export const AddComment = ( restaurant_name: string,
     let unit_number = unit[0]
     let restaurant_key: string = `${restaurant_name}_${postal}_${unit_number}`;
     const restRef = db.collection('restaurants').doc(restaurant_key);
-    restRef.collection('comments').add({
-                        review: comment,
+    restRef.collection('reviews').add({
+                        uid: uid,
+                        review: review,
                         rating: rating,
                         created: firebase.firestore.FieldValue.serverTimestamp()
                     })

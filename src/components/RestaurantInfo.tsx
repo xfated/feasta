@@ -14,7 +14,6 @@ interface RestaurantInfoProps {
 
 const RestaurantInfo = (props: RestaurantInfoProps) => {
     const RestInfo = props.results != null ? props.results.map((result, i) => {
-
             // console.log(result.summary);
             if (i < props.numDisplay) {
                 return (

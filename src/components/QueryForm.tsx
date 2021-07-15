@@ -13,7 +13,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
     const [query, setQuery] = useState({
         postal: "",
         topk: 5,
-        querytype: "Random",
+        querytype: "Semantic",
         query: "",
         region: "",
     })
@@ -75,9 +75,9 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                                     ...query,
                                                     querytype:e.currentTarget.value}
                                                 )}>
-                                <option>Random</option>
-                                <option>Top Rated</option>
                                 <option>Semantic</option>
+                                <option>Top Rated</option>
+                                <option>Random</option>
                             </Input>
                             {query.querytype === "Random" &&
                                 <FormText>Returns restaurants randomly</FormText>

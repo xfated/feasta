@@ -309,6 +309,9 @@ const FoodFinder = () => {
                     if (results === null){
                         console.log("it is null");
                     }
+                    console.log(firebase.auth().currentUser);
+                    const uid = firebase.auth().currentUser?.uid;
+                    console.log(uid);
                     // console.log(results);
                     // console.log(queryStatus);
                     // console.log

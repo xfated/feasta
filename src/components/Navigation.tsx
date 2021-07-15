@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navbar, Nav, NavItem, Button, Modal, ModalBody, ModalHeader, ListGroup, ListGroupItem } from 'reactstrap';
 import './Navigation.css';
+import SignInScreen from './SignInScreen';
 
 const Navigation = () => {
 
@@ -33,6 +34,9 @@ const Navigation = () => {
                             <i className="fa fa-question-circle fa-lg fa-fw"></i>
                         </Button>
                     </NavItem>      
+                    <NavItem>
+                        <SignInScreen />
+                    </NavItem>    
                     {/* <NavItem>
                         <Button onClick={toggleInfoModal} className="button">
                             <i className="fa fa-question-circle fa-lg fa-fw"></i>

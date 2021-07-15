@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './FeedbackForm.css';
-import { Query } from './FoodFinder';
 import { AddFeedback } from './firestore_utils';
 import { Row, Button, Label, Form, FormGroup, Input } from 'reactstrap';
 
@@ -47,7 +46,7 @@ const FeedbackForm = () => {
                         </FormGroup>
                     </Row>
                     <Row className="mt-3 flex flex-horizontal-center">
-                        <Button outline type="submit" value="submit" color="secondary" 
+                        <Button outline type="submit" value="submit" color="info" 
                                 className="mt-3 col-3">
                             Submit
                         </Button>
