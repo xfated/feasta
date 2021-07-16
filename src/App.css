@@ -7,7 +7,7 @@
   --header: #286FB4;
   --darkbg: #282c34;
   --text: ;
-  --icon: #fcb5f6;
+  --icon: rgb(243, 222, 63);
 }
 
 
@@ -54,6 +54,10 @@
 .section-header{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   padding: 5% 0;
+}
+
+.width-100 {
+  width: 100%
 }
 
 html {

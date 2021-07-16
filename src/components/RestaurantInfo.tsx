@@ -18,7 +18,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
             if (i < props.numDisplay) {
                 return (
                     <div className="row rest-container border-bottom mb-4" key={i}>
-                        <a href={`https://google.com/search?q=${result.name}`} className="rest-link">
+                        <a href={`https://google.com/search?q=${result.name} restaurant singapore`} className="rest-link">
                             <Button className="rest-button">
                                 <i className="fa fa-external-link-square fa-lg fa-fw"></i>
                             </Button>
@@ -47,14 +47,16 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                             </div>
                         </h2>
                         <div className="w-100 mb-2">
-                            <h4 className="mb-0"><b className="rest-info">Address:</b></h4>
+                            <h3 className="mb-0">
+                                <b className="rest-info">Address:</b>
+                            </h3>
                             <span>{result.address}</span>
                         </div>  
                         <div>
                             <div className="rest-info w-100 mb-0">
                                 <div className="row">
                                     <div className="col-2">
-                                        <h4><b>Summary:</b></h4>
+                                        <h3><b>Summary:</b></h3>
                                     </div>
                                     <div className="col-1">
                                         <i className="fa fa-question-circle fa-lg pl-1 pr-1 mt-2 summary-info" id={`summary-info-${i}`}></i>
@@ -70,9 +72,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                                 {result.summary}
                             </p>
                             <p>
-                                <small>
-                                    Reviewed on tripadvisor.com.sg
-                                </small>
+                                Reviewed on tripadvisor.com.sg
                             </p>
                         </div>
                         <div className="w-100">

@@ -28,6 +28,25 @@
 .review {
     /* border: 1px solid rgb(240, 232, 173); */
     /* border-radius: 10px; */
-    font-family: Times, serif;
-    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    /* border-bottom: 1px solid #aeaeae; */
+    margin-bottom: 10px;
+    /* padding-bottom: 0px; */
+}
+
+.review-name {
+    /* text-decoration: underline;
+    text-decoration-color: var(--darkbg); */
+    border-bottom: 1px solid var(--darkbg);
+}
+.review-box {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--icon);
+}
+.delete-button {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
 }
