@@ -118,7 +118,7 @@ const FoodFinder = () => {
                             setFetchResults(false);
                             // console.log('success');
                         }
-                        else if (tries >= 5){
+                        else if (tries >= 10){
                             setTries(0);
                             setFetchResults(false);
                             setQueryStatus("Failed");
@@ -232,8 +232,13 @@ const FoodFinder = () => {
                     <div className="w-100 flex flex-horizontal-center">
                         <p className="mb-0">{results.length} results found</p>
                     </div>
+                    { queryType === "Semantic" && 
+                        <div className="col-12 text-center">
+                            <p className="disclaimer-info">Please 'Like' the search result if you think it matches your query well!</p>
+                        </div>
+                    }
                     <div className="col-12 text-center pb-3">
-                        <p className="disclaimer-info">Please 'Like' the search result if you think it matches your query well!</p>
+                        <p className="disclaimer-info">Also, please do give a review so that these eateries get the attention they deserve!</p>
                     </div>
                     <RestaurantInfo results={results} numDisplay={numDisplay} queryType={queryType} query={query}/>
                     { results.length > numDisplay && 
@@ -273,12 +278,14 @@ const FoodFinder = () => {
                 </div>
                 <p>Options for when you're out of options.</p>
             </div>
-            <Limitations />
+            <div className="hide-overflow">
+                <Limitations />
+           </div>
             <div className="query-container pb-5">
                 <QueryForm handleQuery={handleQuery}/>
             </div>
             <div className="results-container hide-overflow">
-                <div className="row pr-0 pl-0 flex flex-horizontal-center">
+                <div className="row pr-0 pl-0 flex flex-horizontal-center ">
                     { (queryStatus === "Loading") && 
                         <div className="col-12 flex flex-horizontal-center mb-5">
                             <Spinner style={{ width: '3rem', height: '3rem' }} />
@@ -304,6 +311,11 @@ const FoodFinder = () => {
                     <QueryDisplay />
                 </div>
             </div>
+            { queryStatus === 'Success' &&
+                <div className="col-12 text-center pb-3">
+                    <p className="disclaimer-info">Do contact me (email at the bottom) if you think a restaurant should be added to this website!</p>
+                </div>
+            }
             {/* Test button */}
             {/* <Button style={{backgroundColor:'green', zIndex:1}} onClick={() => {
                     if (results === null){

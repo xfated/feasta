@@ -218,9 +218,9 @@ const Reviews = (props: CommentsProps) => {
     return (
         <>
             <div className="review-info w-100 mb-0">
-                { ((displayReviews && displayReviews.length > 0) || (userReview !== undefined)) &&
+                { (displayReviews && displayReviews.length > 0) &&
                     <div>
-                        <div className="row width-100">
+                        <div className="row hide-overflow width-100">
                             <div className="col-2">
                                 <h3><b>Reviews:</b></h3>
                             </div>

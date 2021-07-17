@@ -7,7 +7,7 @@ export const AddFeedback = (feedback: string, type: string) => {
     db.collection("feedback").add({
         feedback: feedback,
         type: type,
-        created: firebase.database.ServerValue.TIMESTAMP
+        created: firebase.firestore.FieldValue.serverTimestamp()
     })
     // .then((docRef: DocumentReference) => {
     //     console.log("Document written with ID: ", docRef.id);
@@ -21,7 +21,8 @@ export const AddGoodMatch = (query: string, restaurant_name: string, address: st
     db.collection("query-match").add({
         query: query,
         restaurant_name: restaurant_name,
-        address: address
+        address: address,
+        created: firebase.firestore.FieldValue.serverTimestamp()
     })
     // .then((docRef: DocumentReference) => {
     //     console.log("Document written with ID: ", docRef.id);
@@ -42,7 +43,7 @@ export const AddQuery = (query: string,
         topk: topk,
         querytype: querytype,
         region: region,
-        created: firebase.database.ServerValue.TIMESTAMP
+        created: firebase.firestore.FieldValue.serverTimestamp()
     })
     // .then((docRef: DocumentReference) => {
     //     console.log("Document written with ID: ", docRef.id);
@@ -89,7 +90,7 @@ export const DeleteReview = ( restaurant_name: string,
                 review.ref.delete();
             })
         })
-        .catch((err) => {
+        .catch((err: Error) => {
             console.log(err);
         })
 

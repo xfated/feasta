@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Reviews from './Reviews';
 import { Button, UncontrolledPopover, PopoverBody } from 'reactstrap';
 import './RestaurantInfo.css';
@@ -14,34 +14,42 @@ interface RestaurantInfoProps {
 
 const RestaurantInfo = (props: RestaurantInfoProps) => {
     const RestInfo = props.results != null ? props.results.map((result, i) => {
+            const direct_url = `https://google.com/search?q=${result.name} ${result.address}`
             // console.log(result.summary);
             if (i < props.numDisplay) {
                 return (
                     <div className="row rest-container border-bottom mb-4" key={i}>
-                        <a href={`https://google.com/search?q=${result.name} restaurant singapore`} className="rest-link">
-                            <Button className="rest-button">
+                        <a href={direct_url} className="rest-link">
+                            <Button className="rest-button pb-2">
                                 <i className="fa fa-external-link-square fa-lg fa-fw"></i>
                             </Button>
                         </a>
                         { props.queryType === "Semantic" && 
-                            <Button className="rest-like rest-button" 
-                                    onClick={() => {
-                                        AddGoodMatch(props.query, result.name, result.address)
-                                    }}>
-                                <i className="fa fa-heart fa-lg fa-fw" id={`like-rest-${i}`}></i>
-                                <UncontrolledPopover trigger="hover click" placement="bottom" target={`like-rest-${i}`}>
-                                    <PopoverBody>
-                                        Give a like if think this is a good recommendation!
-                                    </PopoverBody>
-                                </UncontrolledPopover>
-                            </Button>
+                                <Button className="rest-like rest-button pb-2" 
+                                        onClick={() => {
+                                            AddGoodMatch(props.query, result.name, result.address);
+                                        }}>
+                                    <i className="fa fa-heart fa-lg fa-fw" id={`like-rest-${i}`}></i>
+                                    {/* <UncontrolledPopover trigger="hover" placement="bottom" target={`like-rest-${i}`}>
+                                        <PopoverBody>
+                                            Give a like if think this is a good recommendation!
+                                        </PopoverBody>
+                                    </UncontrolledPopover> */}
+                                    <UncontrolledPopover trigger="legacy" placement="bottom" target={`like-rest-${i}`}>
+                                        <PopoverBody>
+                                        Thank you for your input!
+                                        </PopoverBody>
+                                    </UncontrolledPopover>
+                                </Button>
                         }
-                        <h2 className="w-100">
+                        <h2 className="w-100 mb-2">
                             <div className="row">
-                                <div className="rest-title col-6 col-md-5">
-                                    <b>{result.name}</b>
+                                <div className="col-6 col-md-5">
+                                    <a href={direct_url} className="name-link rest-title">
+                                        <b>{result.name}</b>
+                                    </a>
                                 </div>
-                                <div className="rest-info col-4">
+                                <div className="rest-info col-4 d-flex justify-content-start mt-1">
                                     <small>Rating: {result.rating.toFixed(2)} / 5</small>
                                 </div>
                             </div>
@@ -53,7 +61,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
                             <span>{result.address}</span>
                         </div>  
                         <div>
-                            <div className="rest-info w-100 mb-0">
+                            <div className="rest-info w-100 mb-0 ">
                                 <div className="row">
                                     <div className="col-2">
                                         <h3><b>Summary:</b></h3>

@@ -7,18 +7,22 @@
     top: 1;
     right: 0;
 }
-
 .rest-like {
     position: absolute;
     top: 1;
     right: 40px;
 }
-
+.like-submit {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
 
 .rest-button {
     border: none;
     background-color: #fff;
     color: var(--highlight);
+    z-index: 10;
 }
 .rest-button:hover {
     background-color: var(--background1);
@@ -28,18 +32,24 @@
 .rest-title{
     font-family: simplifica, Georgia, 'Times New Roman', Times, serif;
     text-decoration: underline;
-    text-decoration-color: var(--highlight);
+    color: var(--darkbg);
+    text-decoration-color: var(--highlight) !important;
 }
 .rest-info{
     font-family: simplifica, Georgia, 'Times New Roman', Times, serif;
 }
+
+.name-color:hover {
+    color: var(--darkbg);
+}
+  
 
 .rest-container{
     position: relative;
 }
 
 .summary-info {
-    color: var(--icon);
+    color: var(--highlight);
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */

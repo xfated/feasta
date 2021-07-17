@@ -8,10 +8,14 @@ const FeedbackForm = () => {
 
     const [feedback, setFeedback] = useState('');
     const [feedbackType, setFeedbackType] = useState('');
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
     const submitFeedback = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(process.env.REACT_APP_apiKey);
         AddFeedback(feedback, feedbackType);
+        setFeedback('');
+        setFeedbackType('');
+        setFeedbackSubmitted(true);
     }
 
     return (
@@ -22,7 +26,7 @@ const FeedbackForm = () => {
                 </div>
                 <p>Appreciate any form of input!</p>
             </div>
-            <div className="container mb-5">
+            <div className="container mb-3">
                 <Form onSubmit = {(e: React.FormEvent) => submitFeedback(e)}>
                     <Row>
                         <FormGroup className="col-12  mt-2 mt-md-0">
@@ -53,6 +57,11 @@ const FeedbackForm = () => {
                     </Row>
                 </Form>
             </div>
+            { feedbackSubmitted && 
+                <div className="w-100 text-center pt-0 pb-3">
+                    <h4>Thank you for your feedback!</h4>
+                </div>
+            }
         </>
     )
 }

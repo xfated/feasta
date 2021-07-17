@@ -46,7 +46,15 @@ function SignInScreen() {
                     </ModalHeader>
                     <ModalBody>
                         <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                        <div className="w-100 text-center">
+                            <p>*Please try a different browser if the login button does not appear</p>
+                        </div>
                     </ModalBody>
+                    {/* <ModalBody style={{minHeight: "200px"}} className="flex flex-vertical-center flex-horizontal-center">
+                        <div>
+                            <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                        </div>
+                    </ModalBody> */}
                 </ Modal>
             </div>
         );

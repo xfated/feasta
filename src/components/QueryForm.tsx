@@ -55,7 +55,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
 
     return(
         <>
-            <div className="container">
+            <div className="container hide-overflow">
                 <Form onSubmit = {(e: React.FormEvent) => submitQuery(e)}>
                     <Row>
                         <FormGroup className="col-12 col-md-4 mt-2 mt-md-0">

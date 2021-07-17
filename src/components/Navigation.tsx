@@ -26,8 +26,8 @@ const Navigation = () => {
     }, [])
 
     return (
-        <div>
-            <Navbar className={`navbar-overlap w-100 ${navHidden && 'nav-hidden'}`}>
+        <div className="w-100">
+            <Navbar className={`navbar-overlap ${navHidden && 'nav-hidden'}`}>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <Button onClick={toggleInfoModal} className="button">

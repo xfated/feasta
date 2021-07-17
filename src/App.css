@@ -57,7 +57,14 @@
 }
 
 .width-100 {
-  width: 100%
+  width: 100vw;
+}
+
+.remove-link-color {
+  color: var(--darkbg);
+}
+.remove-link-color:hover {
+  color: var(--darkbg);
 }
 
 html {
