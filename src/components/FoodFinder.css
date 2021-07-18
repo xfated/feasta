@@ -58,3 +58,14 @@
 .hide-overflow {
     overflow: hidden;
 }
+
+.add-info{
+    margin: 10px 0px;
+    font-family: Helvetica, sans-serif, Times, serif !important;
+    font-weight: 500;
+    font-style: oblique;
+}
+
+.restaurant-info-box{
+    min-width: 80vw;
+}

@@ -49,7 +49,7 @@ const Limitations = () => {
                     >
                     <div className="info">
                         <div className="col-12 text-center pt-5">
-                            <p id="time-info" className="disclaimer-info">Semantic search only available from <b>9am to 9pm.</b></p>
+                            <p id="time-info" className="disclaimer-info">Text Query search only available from <b>9am to 9pm.</b></p>
                             <UncontrolledPopover trigger="hover click" placement="top" target="time-info">
                                 <PopoverBody>
                                     Because hosting is expensive.

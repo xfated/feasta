@@ -232,15 +232,20 @@ const FoodFinder = () => {
                     <div className="w-100 flex flex-horizontal-center">
                         <p className="mb-0">{results.length} results found</p>
                     </div>
-                    { queryType === "Semantic" && 
+                    { queryType === "Text Query" && 
                         <div className="col-12 text-center">
-                            <p className="disclaimer-info">Please 'Like' the search result if you think it matches your query well!</p>
+                            <p className="add-info ml-2 mr-2">Please 'Like' the search result if you think it matches your query well!</p>
                         </div>
                     }
                     <div className="col-12 text-center pb-3">
-                        <p className="disclaimer-info">Also, please do give a review so that these eateries get the attention they deserve!</p>
+                        <p className="add-info ml-2 mr-2">Also, <b>please do give a review</b> so that these eateries get the attention they deserve!</p>
                     </div>
-                    <RestaurantInfo results={results} numDisplay={numDisplay} queryType={queryType} query={query}/>
+                    <div className="col-12 text-center pb-3">
+                        <p className="add-info ml-2 mr-2">P.S. Ratings shown are obtained by calculating the average of the reviews I had initially gathered online.</p>
+                    </div>
+                    <div className="restaurant-info-box">
+                        <RestaurantInfo results={results} numDisplay={numDisplay} queryType={queryType} query={query}/>
+                    </div>
                     { results.length > numDisplay && 
                         <div className="w-100 flex flex-horizontal-center">
                             <Button onClick={() => setNumDisplay(numDisplay + 5)} className="button more-button pt-0 pb-0">
@@ -313,7 +318,7 @@ const FoodFinder = () => {
             </div>
             { queryStatus === 'Success' &&
                 <div className="col-12 text-center pb-3">
-                    <p className="disclaimer-info">Do contact me (email at the bottom) if you think a restaurant should be added to this website!</p>
+                    <p className="disclaimer-info ml-2 mr-2">Do contact me (email at the bottom) if you think a restaurant should be added to this website!</p>
                 </div>
             }
             {/* Test button */}

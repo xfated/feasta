@@ -23,7 +23,7 @@ const Footer = () => {
                         </p>    
                     </div>
                     <div className="col-12 flex flex-horizontal-center">
-                        <p className="disclaimer mt-0">
+                        <p className="disclaimer mt-0 ml-2 mr-2">
                             A few words:<br/>
                             It has been a fun project but I'm not sure if I will continue developing on this idea or just leave it as it is.<br/>
                             Would like to hear any feedback if this has actually been useful for anyone else as it has been for me!

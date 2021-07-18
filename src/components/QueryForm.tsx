@@ -13,7 +13,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
     const [query, setQuery] = useState({
         postal: "",
         topk: 5,
-        querytype: "Semantic",
+        querytype: "Text Query",
         query: "",
         region: "",
     })
@@ -70,12 +70,11 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                         <FormGroup className="col-12 col-md-4 mt-2 mt-md-0">
                             <Label htmlFor="querytype">&nbsp;Query Type</Label>
                             <Input type="select" id="querytype" name="querytype" value={query.querytype}
-                                placeholder="Random or Semantic search"
                                 onChange={(e: React.FormEvent<HTMLInputElement>) => setQuery({
                                                     ...query,
                                                     querytype:e.currentTarget.value}
                                                 )}>
-                                <option>Semantic</option>
+                                <option>Text Query</option>
                                 <option>Top Rated</option>
                                 <option>Random</option>
                             </Input>
@@ -92,7 +91,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                     </UncontrolledPopover>
                                 </FormText>
                             }
-                            {query.querytype === "Semantic" &&
+                            {query.querytype === "Text Query" &&
                                 <FormText>Search restaurants that are similar to your query</FormText>
                             }
                         </FormGroup>
@@ -143,7 +142,7 @@ const QueryForm = ({ handleQuery }: PropsFunction) => {
                                 <FormText>Region of Singapore</FormText> }
                         </FormGroup>
                     </Row>
-                    { query.querytype === 'Semantic' &&
+                    { query.querytype === 'Text Query' &&
                         <Row className="mt-2">
                             <FormGroup className="col-12">
                                 <Label htmlFor="query">&nbsp;Query</Label>
