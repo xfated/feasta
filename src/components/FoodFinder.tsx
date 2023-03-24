@@ -285,7 +285,16 @@ const FoodFinder = () => {
             </div>
             <div className="hide-overflow">
                 <Limitations />
-           </div>
+            </div>
+            <div
+                style={{
+                    width: "100%",
+                    textAlign: "center",
+                    color: "red",
+                    fontSize: "1.5em",
+                    paddingBottom: "10px"
+                }}
+            >{"NOTE: The backend has been taken down because it is expensive :("}</div>
             <div className="query-container pb-5">
                 <QueryForm handleQuery={handleQuery}/>
             </div>
